@@ -1,7 +1,16 @@
-import React from 'react'
+import { useState } from 'react';
+
+import TabsMenu from './components/TabsMenu/TabsMenu';
+import WidgetsContainer from './components/WidgetsContainer/WidgetsContainer';
 
 function App() {
-  return <div className='App'></div>
+  const [widgetType, setWidgetType] = useState<string>('agenda');
+  return (
+    <div className='App'>
+      <TabsMenu setWidgetType={setWidgetType} />
+      <WidgetsContainer widgetType={widgetType} />
+    </div>
+  );
 }
 
-export default App
+export default App;

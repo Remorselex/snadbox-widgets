@@ -1,0 +1,8 @@
+.EventInput {
+  display: flex;
+  flex: 0.5;
+  margin-left: 1%;
+  border-radius: 17px;
+  height: 2em;
+  padding-left: 1%;
+}
