@@ -1,4 +1,9 @@
 {
+  "rules": {
+    "declaration-property-value-disallowed-list": {
+      "alpha-value-notation": [true]
+    }
+  },
   "processors": [
     [
       "stylelint-processor-styled-components",
