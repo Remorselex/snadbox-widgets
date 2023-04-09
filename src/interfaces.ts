@@ -6,6 +6,10 @@ export enum Widgets {
   Lobby = 'lobby',
 }
 
+export interface IWidgetContainer {
+  widgetType: Widgets;
+}
+
 export interface ISetWidgetType {
   setWidgetType: React.Dispatch<React.SetStateAction<Widgets>>;
 }

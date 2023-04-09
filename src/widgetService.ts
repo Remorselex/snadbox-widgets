@@ -34,3 +34,4 @@
 // }
 
 // export default fetchWidget;
+export {};
