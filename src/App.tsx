@@ -3,7 +3,7 @@ import { useState } from 'react';
 import TabsMenu from './components/TabsMenu/TabsMenu';
 import WidgetsContainer from './components/WidgetsContainer/WidgetsContainer';
 
-import { Widgets } from './interfaces';
+import { Widgets } from './utils/interfaces';
 
 function App() {
   const [widgetType, setWidgetType] = useState<Widgets>(Widgets.Agenda);

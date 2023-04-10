@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 
-import { IWidgetContainer } from '../../interfaces';
+import { IWidgetContainer } from '../../utils/interfaces';
 
 function WidgetsContainer({ widgetType }: IWidgetContainer) {
   useEffect(() => {
