@@ -1,24 +1,23 @@
 import { useEffect } from 'react';
 
-import { IWidgetContainer } from '../../utils/interfaces';
+import { WIDGET_SOURCE_URL } from '../../utils/constants';
+import { IWidgetContainerProps } from '../../utils/interfaces';
 
-function WidgetsContainer({ widgetType }: IWidgetContainer) {
+function WidgetsContainer({ widgetType, eventId }: IWidgetContainerProps) {
   useEffect(() => {
     (async () => {
       const script = document.createElement('script');
-      script.src = 'https://console.dealroomevents.com/assets/dealRoomWidgets.js';
+      script.src = WIDGET_SOURCE_URL;
       await document.body.append(script);
     })();
   }, []);
-  return (
-    <div key={widgetType}>
+  return eventId.length === 36 ? (
+    <div key={Date.now()}>
       {/* @ts-ignore*/}
-      <dealroomevent-widgets
-        id='dealroomevent-widgets'
-        typeWidget={widgetType}
-        eventId='657f67ff-1fbf-40f9-b027-f2b03a4f0689'
-      />
+      <dealroomevent-widgets className='widgetComponent' typeWidget={widgetType} eventId={eventId} />
     </div>
+  ) : (
+    <h1 style={{ display: 'flex', justifyContent: 'center', padding: '10% 0' }}>Enter event ID</h1>
   );
 }
 

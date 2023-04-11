@@ -1,11 +1,16 @@
-import classes from './EventInput.module.css';
-function EventInput() {
+import { TextField } from '@mui/material';
+
+import { IsetEventId } from '../../utils/interfaces';
+
+function EventInput({ setEventId }: IsetEventId) {
   return (
-    <input
-      onChange={(event) => console.log(event.target.value)}
-      className={classes.EventInput}
-      type='text'
-      placeholder='Enter event ID'
+    <TextField
+      onChange={(event) => setEventId(event.target.value)}
+      sx={{ width: '30%' }}
+      label='Enter event ID'
+      variant='outlined'
+      size='small'
+      margin='dense'
     />
   );
 }

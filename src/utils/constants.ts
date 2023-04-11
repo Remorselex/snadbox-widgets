@@ -7,3 +7,4 @@ export const WIDGET_TYPE_MAP: { [key: string]: Widgets } = {
   exhibitor: Widgets.Exhibitor,
   lobby: Widgets.Lobby,
 };
+export const WIDGET_SOURCE_URL = 'https://console.dealroomevents.com/assets/dealRoomWidgets.js';

@@ -1,18 +1,34 @@
 import { TabContext, TabList, TabPanel } from '@mui/lab';
 
 import { Box, Tab } from '@mui/material';
-import { useState } from 'react';
+import React, { useState } from 'react';
 
 import { WIDGET_TYPE_MAP } from '../../utils/constants';
-import { ISetWidgetType } from '../../utils/interfaces';
+import { ISetWIdgets } from '../../utils/interfaces';
+import EventInput from '../EventInput/EventInput';
 
-function TabsMenu({ setWidgetType }: ISetWidgetType) {
+function TabsMenu({ setWidgetType, setEventId }: ISetWIdgets) {
   const [value, setValue] = useState('1');
   const handleChange = (event: React.SyntheticEvent, newValue: string) => setValue(newValue);
   return (
     <TabContext value={value}>
-      <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
+      <Box
+        sx={{
+          borderBottom: 1,
+          borderColor: 'divider',
+          display: 'flex',
+          justifyContent: 'space-between',
+          alignItems: 'center',
+          position: 'fixed',
+          zIndex: '100',
+          width: '100%',
+          background: 'white',
+          padding: '0 calc(1em - 2px)',
+        }}
+      >
+        <EventInput setEventId={setEventId} />
         <TabList
+          sx={{ paddingRight: '1em' }}
           onChange={(event, newValue) => {
             handleChange(event, newValue);
             const eventWidgetType: string | undefined = (event.target as HTMLElement).textContent?.toLowerCase();

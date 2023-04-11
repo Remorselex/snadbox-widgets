@@ -1,3 +1,5 @@
+import React from 'react';
+
 export enum Widgets {
   Agenda = 'agenda',
   Speaker = 'speaker',
@@ -6,10 +8,18 @@ export enum Widgets {
   Lobby = 'lobby',
 }
 
-export interface IWidgetContainer {
+export type EventId = string;
+
+export interface IWidgetContainerProps {
   widgetType: Widgets;
+  eventId: EventId;
 }
 
-export interface ISetWidgetType {
+export interface IsetEventId {
+  setEventId: React.Dispatch<React.SetStateAction<EventId>>;
+}
+
+export interface ISetWIdgets {
   setWidgetType: React.Dispatch<React.SetStateAction<Widgets>>;
+  setEventId: React.Dispatch<React.SetStateAction<EventId>>;
 }
