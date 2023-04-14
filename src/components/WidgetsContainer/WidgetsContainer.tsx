@@ -1,11 +1,11 @@
 import { useState, useEffect, useRef } from 'react';
 
 import { WIDGET_SOURCE_URL } from '../../utils/constants';
-import { IWidgetContainerProps } from '../../utils/interfaces';
+import { IWidgetContainerProps, Widgets } from '../../utils/interfaces';
 
 function WidgetsContainer({ widgetType, eventId }: IWidgetContainerProps) {
   const widgetsRef = useRef(null);
-  const [bgColor, setBgColor] = useState('#default-color');
+  const [bgColor, setBgColor] = useState('#000000');
 
   useEffect(() => {
     (async () => {
@@ -17,31 +17,26 @@ function WidgetsContainer({ widgetType, eventId }: IWidgetContainerProps) {
 
   useEffect(() => {
     if (widgetsRef.current) {
-      const observer = new MutationObserver(() => {
-        //@ts-ignore
-        const myElement = widgetsRef.current.shadowRoot.querySelector('.agenda-section');
-        console.log(myElement);
-        if (myElement) {
-          myElement.style.setProperty('--agenda-section-bg', bgColor);
+      const widget = document.querySelector('[typeWidget]')?.shadowRoot;
+
+      if (widget) {
+        const element = widget.querySelector('.agenda-section') as HTMLElement;
+
+        if (element) {
+          element.style.backgroundColor = bgColor;
         }
-      });
-
-      observer.observe(widgetsRef.current, { childList: true, subtree: true });
-
-      return () => {
-        observer.disconnect();
-      };
+      }
     }
-  }, []);
+  }, [bgColor]);
 
   //@ts-ignore
   const handleColorChange = (e) => {
     setBgColor(e.target.value);
   };
 
-  return eventId.length === 36 ? (
-    <div key={Date.now()}>
-      <input type='color' value={bgColor} onChange={handleColorChange} />
+  return eventId && eventId.length === 36 ? (
+    <div key={(widgetType as Widgets) + eventId}>
+      <input type='color' value={bgColor} onChange={(event) => handleColorChange(event)} />
       {/*@ts-ignore*/}
       <dealroomevent-widgets typeWidget={widgetType} eventId={eventId} ref={widgetsRef} />
     </div>

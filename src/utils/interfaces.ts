@@ -8,18 +8,20 @@ export enum Widgets {
   Lobby = 'lobby',
 }
 
-export type EventId = string;
+export type EventId = string | null;
 
 export interface IWidgetContainerProps {
   widgetType: Widgets;
   eventId: EventId;
 }
 
+type EventAction<T> = React.Dispatch<React.SetStateAction<T>>;
+
 export interface IsetEventId {
-  setEventId: React.Dispatch<React.SetStateAction<EventId>>;
+  setEventId: EventAction<EventId>;
 }
 
 export interface ISetWIdgets {
-  setWidgetType: React.Dispatch<React.SetStateAction<Widgets>>;
-  setEventId: React.Dispatch<React.SetStateAction<EventId>>;
+  setWidgetType: EventAction<Widgets>;
+  setEventId: EventAction<EventId>;
 }
