@@ -34,8 +34,10 @@ function WidgetsContainer({ widgetType, eventId }: IWidgetContainerProps) {
     if (widgetsRef.current) {
       const widget = document.querySelector('[typeWidget]')?.shadowRoot;
       if (widget) {
-        //@ts-ignore
-        widget.getElementById('styleInWidget').textContent = widgetsStyle;
+        const styleElement = widget.getElementById('styleInWidget');
+        if (styleElement) {
+          styleElement.textContent = widgetsStyle;
+        }
       }
     }
   }, [widgetsStyle]);
@@ -49,10 +51,7 @@ function WidgetsContainer({ widgetType, eventId }: IWidgetContainerProps) {
         paddingTop: '0.3%',
       }}
     >
-      <CssEditor
-        //@ts-ignore
-        setWidgetsStyle={setWidgetsStyle}
-      />
+      <CssEditor setWidgetsStyle={setWidgetsStyle} />
       {/*@ts-ignore*/}
       <dealroomevent-widgets
         typeWidget={widgetType}
