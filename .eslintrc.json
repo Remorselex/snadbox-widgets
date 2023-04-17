@@ -7,11 +7,24 @@
     }
   },
   "rules": {
-    "prettier/prettier": 2,
+    "prettier/prettier": [
+      "error",
+      {
+        "endOfLine": "auto"
+      }
+    ],
     "import/order": [
       2,
       {
-        "groups": ["external", "builtin", "index", "sibling", "parent", "internal", "type"],
+        "groups": [
+          "external",
+          "builtin",
+          "index",
+          "sibling",
+          "parent",
+          "internal",
+          "type"
+        ],
         "alphabetize": {
           "order": "asc",
           "caseInsensitive": true
