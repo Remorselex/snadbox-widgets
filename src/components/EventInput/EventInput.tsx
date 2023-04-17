@@ -1,6 +1,6 @@
 import { TextField } from '@mui/material';
 
-import { IsetEventId } from '../../utils/interfaces';
+import { IsetEventId } from '../../utils/types';
 
 function EventInput({ setEventId }: IsetEventId) {
   return (

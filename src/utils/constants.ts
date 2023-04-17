@@ -1,4 +1,4 @@
-import { Widgets } from './interfaces';
+import { Widgets } from './types';
 
 export const WIDGET_TYPE_MAP: { [key: string]: Widgets } = {
   agenda: Widgets.Agenda,
