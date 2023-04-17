@@ -8,6 +8,7 @@ import CssEditor from '../CssEditor/CssEditor';
 function WidgetsContainer({ widgetType, eventId }: IWidgetContainerProps) {
   const widgetsRef = useRef(null);
   const [widgetsStyle, setWidgetsStyle] = useState<WidgetsStyle>(null);
+  localStorage.setItem('widgetsStyle', widgetsStyle || '');
 
   useEffect(() => {
     const script = document.createElement('script');

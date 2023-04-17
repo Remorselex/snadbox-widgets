@@ -5,6 +5,7 @@ import React, { useState } from 'react';
 
 import { WIDGET_TYPE_MAP } from '../../utils/constants';
 import { ISetWIdgets } from '../../utils/types';
+import CodeModal from '../CodeModal/CodeModal';
 import EventInput from '../EventInput/EventInput';
 
 function TabsMenu({ setWidgetType, setEventId }: ISetWIdgets) {
@@ -28,6 +29,7 @@ function TabsMenu({ setWidgetType, setEventId }: ISetWIdgets) {
         }}
       >
         <EventInput setEventId={setEventId} />
+        <CodeModal />
         <TabList
           sx={{ paddingRight: '1em' }}
           onChange={(event, newValue) => {
