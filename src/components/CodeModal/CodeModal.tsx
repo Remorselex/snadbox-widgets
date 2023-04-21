@@ -1,8 +1,10 @@
+import { Button } from '@mui/material';
 import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
-import Switch from '@mui/material/Switch';
 import Typography from '@mui/material/Typography';
 import { useState } from 'react';
+
+import { STYLED_WIDGET_SCRIPT } from '../../utils/constants';
 
 const style = {
   position: 'absolute',
@@ -23,14 +25,20 @@ function CodeModal() {
     setChecked(!checked);
   };
 
+  function copyToClipboard(): void {
+    navigator.clipboard.writeText(
+      STYLED_WIDGET_SCRIPT(localStorage.getItem('widgetsStyle') || '')
+    );
+  }
   return (
     <div>
-      <Switch
-        checked={checked}
-        onChange={handleModalAction}
-        title='Show modal window'
-        inputProps={{ 'aria-label': 'controlled' }}
-      />
+      <Button
+        variant='outlined'
+        onClick={handleModalAction}
+        title='Show modal window with generated code for your page'
+      >
+        Show Code
+      </Button>
       <Modal
         open={open}
         onClose={handleModalAction}
@@ -39,18 +47,20 @@ function CodeModal() {
       >
         <Box sx={style}>
           <Typography id='modal-modal-title' variant='h6' component='h2'>
-            Thereis a generated code for your page ▼
+            Here is a generated code for your page. Paste this at the end of
+            your body tag ▼
           </Typography>
           <hr />
           <Typography id='modal-modal-description' sx={{ mt: 2 }}>
-            {`let widget = 
-                Array.from(document.getElementsByTagName('dealroomevent-widgets'));
-                const style = document.createElement( 'style' );
-                style.innerHTML = \` ${localStorage.getItem('widgetsStyle')} \`;
-                let widgetShadow = widget[0].attachShadow({ mode: "open" });
-                widgetShadow.appendChild(style);
-                `}
+            {STYLED_WIDGET_SCRIPT(localStorage.getItem('widgetsStyle') || '')}
           </Typography>
+          <Button
+            onClick={copyToClipboard}
+            variant='outlined'
+            style={{ justifyContent: 'center', marginTop: '1em' }}
+          >
+            copy to clipboard
+          </Button>
         </Box>
       </Modal>
     </div>

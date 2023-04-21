@@ -49,6 +49,7 @@ function WidgetsContainer({ widgetType, eventId }: IWidgetContainerProps) {
         display: 'grid',
         gridTemplateColumns: '1fr 2fr',
         paddingTop: '0.3%',
+        minHeight: '100vh',
       }}
     >
       <CssEditor setWidgetsStyle={setWidgetsStyle} />

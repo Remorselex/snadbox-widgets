@@ -4,8 +4,9 @@ import AceEditor from 'react-ace';
 import 'ace-builds/src-noconflict/mode-css';
 import 'ace-builds/src-noconflict/theme-dracula';
 import 'ace-builds/src-noconflict/ext-language_tools';
-import { IsetWidgetsStyle } from '../../utils/types';
 import 'ace-builds/webpack-resolver';
+
+import { IsetWidgetsStyle } from '../../utils/types';
 
 function CssEditor({ setWidgetsStyle }: IsetWidgetsStyle) {
   const [editorValue, setEditorValue] = useState('');
@@ -22,6 +23,8 @@ function CssEditor({ setWidgetsStyle }: IsetWidgetsStyle) {
       name='css-editor'
       width='100%'
       height='auto'
+      placeholder='
+      Here is a field to enter your css code!!!'
       onChange={handleEditorChange}
       fontSize={14}
       showPrintMargin={false}
