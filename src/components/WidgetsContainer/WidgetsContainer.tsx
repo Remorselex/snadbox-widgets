@@ -1,69 +1,52 @@
-import { useState, useEffect, useRef } from 'react';
+// import { Collapse, IconButton } from '@material-ui/core';
+// import { makeStyles } from '@material-ui/core/styles';
+// import { ChevronLeft, ChevronRight } from '@material-ui/icons';
 
-import { WIDGET_SOURCE_URL } from '../../utils/constants';
-import { IWidgetContainerProps, Widgets } from '../../utils/types';
-import { WidgetsStyle } from '../../utils/types';
+import { useRef } from 'react';
+
+import classes from './WidgetsContainer.module.css';
+
+import { useWidgetsEffect } from '../../hooks/useWidgetsEffect';
+import { useWidgetsStyles } from '../../hooks/useWidgetsStyles';
+import { IWidgetContainerProps } from '../../utils/types';
+import CodeModal from '../CodeModal/CodeModal';
 import CssEditor from '../CssEditor/CssEditor';
 
 function WidgetsContainer({ widgetType, eventId }: IWidgetContainerProps) {
   const widgetsRef = useRef(null);
-  const [widgetsStyle, setWidgetsStyle] = useState<WidgetsStyle>(null);
-  localStorage.setItem('widgetsStyle', widgetsStyle || '');
+  const [widgetsStyle, setWidgetsStyle] = useWidgetsStyles(widgetsRef);
+  useWidgetsEffect(widgetsStyle, widgetType);
 
-  useEffect(() => {
-    const script = document.createElement('script');
-    script.src = WIDGET_SOURCE_URL;
-    script.async = true;
-    document.body.appendChild(script);
+  const isEventIdValid = eventId && eventId.length === 36;
 
-    return () => {
-      document.body.removeChild(script);
-    };
-  }, []);
-
-  (() => {
-    const widget = document.querySelector('[typeWidget]')?.shadowRoot;
-    const styleInWidget = document.createElement('style');
-    styleInWidget.id = 'styleInWidget';
-    if (widget && !widget.getElementById('styleInWidget')) {
-      widget.append(styleInWidget);
-    }
-  })();
-
-  useEffect(() => {
-    if (widgetsRef.current) {
-      const widget = document.querySelector('[typeWidget]')?.shadowRoot;
-      if (widget) {
-        const styleElement = widget.getElementById('styleInWidget');
-        if (styleElement) {
-          styleElement.textContent = widgetsStyle;
-        }
-      }
-    }
-  }, [widgetsStyle]);
-
-  return eventId && eventId.length === 36 ? (
-    <div
-      key={(widgetType as Widgets) + eventId}
-      style={{
-        display: 'grid',
-        gridTemplateColumns: '1fr 2fr',
-        paddingTop: '0.3%',
-        minHeight: '100vh',
-      }}
-    >
-      <CssEditor setWidgetsStyle={setWidgetsStyle} />
-      {/*@ts-ignore*/}
-      <dealroomevent-widgets
-        typeWidget={widgetType}
-        eventId={eventId}
-        ref={widgetsRef}
-      />
-    </div>
-  ) : (
-    <h1 style={{ display: 'flex', justifyContent: 'center', padding: '10% 0' }}>
-      Enter event ID
-    </h1>
+  return (
+    <>
+      {isEventIdValid ? (
+        <div className={classes.wrapper} key={`${widgetType}_${eventId}`}>
+          <div style={{ width: '66%' }}>
+            {/*@ts-ignore*/}
+            <dealroomevent-widgets
+              typeWidget={widgetType}
+              eventId={eventId}
+              ref={widgetsRef}
+            />
+          </div>
+          <div className={classes.container}>
+            <div className={classes.containerTitle}>
+              <p>Here is a field to write your own css code for widgets ▼</p>
+            </div>
+            <CssEditor setWidgetsStyle={setWidgetsStyle} />
+            <div className={classes.containerBtn}>
+              <CodeModal
+                btnStyle={{ color: '#e0dada', borderColor: '#e0dada' }}
+              />
+            </div>
+          </div>
+        </div>
+      ) : (
+        <h1 className={classes.containerEmpty}>Enter event ID</h1>
+      )}
+    </>
   );
 }
 
