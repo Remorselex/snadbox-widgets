@@ -30,5 +30,5 @@ export const useWidgetsEffect = (
     if (widget && !widget.getElementById('styleInWidget')) {
       widget.append(styleInWidget);
     }
-  }, [widgetType]);
+  }, [widgetsStyle]);
 };
