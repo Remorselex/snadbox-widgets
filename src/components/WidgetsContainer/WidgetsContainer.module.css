@@ -1,0 +1,36 @@
+.wrapper {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+}
+
+.container {
+  position: fixed;
+  left: 0;
+  width: 34%;
+  height: 90%;
+  color: #e0dada;
+}
+
+.containerTitle {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #282a36;
+  height: 5%;
+  font-size: 14px;
+}
+
+.containerBtn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 10%;
+  background: #282a36;
+}
+
+.containerEmpty {
+  display: flex;
+  justify-content: center;
+  padding: 10% 0;
+}
