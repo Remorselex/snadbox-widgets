@@ -17,7 +17,7 @@ const style = {
   boxShadow: 24,
   p: 4,
 };
-function CodeModal() {
+function CodeModal({ btnStyle }: any) {
   const [open, setOpen] = useState(false);
   const [checked, setChecked] = useState(false);
   const handleModalAction = () => {
@@ -33,14 +33,16 @@ function CodeModal() {
   return (
     <div>
       <Button
+        style={btnStyle}
         variant='outlined'
         onClick={handleModalAction}
         title='Show modal window with generated code for your page'
       >
-        Show Code
+        Show embeddable code
       </Button>
       <Modal
         open={open}
+        disableScrollLock={true}
         onClose={handleModalAction}
         aria-labelledby='generated-code-modal-window'
         aria-describedby='generated-code-modal-description'
