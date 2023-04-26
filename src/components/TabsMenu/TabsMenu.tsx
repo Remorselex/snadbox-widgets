@@ -4,12 +4,13 @@ import { Box, Tab } from '@mui/material';
 import React, { useState } from 'react';
 
 import { WIDGET_TYPE_MAP } from '../../utils/constants';
-import { ISetWIdgets } from '../../utils/interfaces';
+import { ISetWIdgets } from '../../utils/types';
 import EventInput from '../EventInput/EventInput';
 
 function TabsMenu({ setWidgetType, setEventId }: ISetWIdgets) {
   const [value, setValue] = useState('1');
-  const handleChange = (event: React.SyntheticEvent, newValue: string) => setValue(newValue);
+  const handleChange = (event: React.SyntheticEvent, newValue: string) =>
+    setValue(newValue);
   return (
     <TabContext value={value}>
       <Box
@@ -31,7 +32,9 @@ function TabsMenu({ setWidgetType, setEventId }: ISetWIdgets) {
           sx={{ paddingRight: '1em' }}
           onChange={(event, newValue) => {
             handleChange(event, newValue);
-            const eventWidgetType: string | undefined = (event.target as HTMLElement).textContent?.toLowerCase();
+            const eventWidgetType: string | undefined = (
+              event.target as HTMLElement
+            ).textContent?.toLowerCase();
             if (eventWidgetType) {
               const widgetType = WIDGET_TYPE_MAP[eventWidgetType];
               setWidgetType(widgetType);
@@ -41,16 +44,14 @@ function TabsMenu({ setWidgetType, setEventId }: ISetWIdgets) {
         >
           <Tab label='Agenda' value='1' />
           <Tab label='Speaker' value='2' />
-          <Tab label='Preregistration' value='3' />
           <Tab label='Exhibitor' value='4' />
-          <Tab label='Lobby' value='5' />
+          <Tab label='Preregistration' value='3' />
         </TabList>
       </Box>
       <TabPanel value='1'></TabPanel>
       <TabPanel value='2'></TabPanel>
       <TabPanel value='3'></TabPanel>
       <TabPanel value='4'></TabPanel>
-      <TabPanel value='5'></TabPanel>
     </TabContext>
   );
 }

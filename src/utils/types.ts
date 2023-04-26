@@ -9,16 +9,22 @@ export enum Widgets {
 }
 
 export type EventId = string | null;
+export type WidgetsStyle = string | null;
+
+type EventAction<T> = React.Dispatch<React.SetStateAction<T>>;
 
 export interface IWidgetContainerProps {
   widgetType: Widgets;
   eventId: EventId;
+  widgetsStyle?: WidgetsStyle;
 }
-
-type EventAction<T> = React.Dispatch<React.SetStateAction<T>>;
 
 export interface IsetEventId {
   setEventId: EventAction<EventId>;
+}
+
+export interface IsetWidgetsStyle {
+  setWidgetsStyle: EventAction<WidgetsStyle>;
 }
 
 export interface ISetWIdgets {

@@ -3,11 +3,13 @@ import { useState } from 'react';
 import TabsMenu from './components/TabsMenu/TabsMenu';
 import WidgetsContainer from './components/WidgetsContainer/WidgetsContainer';
 
-import { EventId, Widgets } from './utils/interfaces';
+import { EventId, Widgets } from './utils/types';
 
 function App() {
   const [widgetType, setWidgetType] = useState<Widgets>(Widgets.Agenda);
-  const [eventId, setEventId] = useState<EventId>(null);
+  const [eventId, setEventId] = useState<EventId>(
+    'e9991c34-320a-400f-8a95-ce31673604f0'
+  );
   return (
     <div className='App'>
       <TabsMenu setWidgetType={setWidgetType} setEventId={setEventId} />

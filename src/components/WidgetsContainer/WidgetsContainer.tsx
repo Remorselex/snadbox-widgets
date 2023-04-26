@@ -1,47 +1,52 @@
-import { useState, useEffect, useRef } from 'react';
+// import { Collapse, IconButton } from '@material-ui/core';
+// import { makeStyles } from '@material-ui/core/styles';
+// import { ChevronLeft, ChevronRight } from '@material-ui/icons';
 
-import { WIDGET_SOURCE_URL } from '../../utils/constants';
-import { IWidgetContainerProps, Widgets } from '../../utils/interfaces';
+import { useRef } from 'react';
+
+import classes from './WidgetsContainer.module.css';
+
+import { useWidgetsEffect } from '../../hooks/useWidgetsEffect';
+import { useWidgetsStyles } from '../../hooks/useWidgetsStyles';
+import { IWidgetContainerProps } from '../../utils/types';
+import CodeModal from '../CodeModal/CodeModal';
+import CssEditor from '../CssEditor/CssEditor';
 
 function WidgetsContainer({ widgetType, eventId }: IWidgetContainerProps) {
   const widgetsRef = useRef(null);
-  const [bgColor, setBgColor] = useState('#000000');
+  const [widgetsStyle, setWidgetsStyle] = useWidgetsStyles(widgetsRef);
+  useWidgetsEffect(widgetsStyle, widgetType);
 
-  useEffect(() => {
-    (async () => {
-      const script = document.createElement('script');
-      script.src = WIDGET_SOURCE_URL;
-      await document.body.append(script);
-    })();
-  }, []);
+  const isEventIdValid = eventId && eventId.length === 36;
 
-  useEffect(() => {
-    if (widgetsRef.current) {
-      const widget = document.querySelector('[typeWidget]')?.shadowRoot;
-
-      if (widget) {
-        const element = widget.querySelector('.agenda-section') as HTMLElement;
-
-        if (element) {
-          element.style.backgroundColor = bgColor;
-        }
-      }
-    }
-  }, [bgColor]);
-
-  //@ts-ignore
-  const handleColorChange = (e) => {
-    setBgColor(e.target.value);
-  };
-
-  return eventId && eventId.length === 36 ? (
-    <div key={(widgetType as Widgets) + eventId}>
-      <input type='color' value={bgColor} onChange={(event) => handleColorChange(event)} />
-      {/*@ts-ignore*/}
-      <dealroomevent-widgets typeWidget={widgetType} eventId={eventId} ref={widgetsRef} />
-    </div>
-  ) : (
-    <h1 style={{ display: 'flex', justifyContent: 'center', padding: '10% 0' }}>Enter event ID</h1>
+  return (
+    <>
+      {isEventIdValid ? (
+        <div className={classes.wrapper} key={`${widgetType}_${eventId}`}>
+          <div style={{ width: '66%' }}>
+            {/*@ts-ignore*/}
+            <dealroomevent-widgets
+              typeWidget={widgetType}
+              eventId={eventId}
+              ref={widgetsRef}
+            />
+          </div>
+          <div className={classes.container}>
+            <div className={classes.containerTitle}>
+              <p>Here is a field to write your own css code for widgets ▼</p>
+            </div>
+            <CssEditor setWidgetsStyle={setWidgetsStyle} />
+            <div className={classes.containerBtn}>
+              <CodeModal
+                btnStyle={{ color: '#e0dada', borderColor: '#e0dada' }}
+              />
+            </div>
+          </div>
+        </div>
+      ) : (
+        <h1 className={classes.containerEmpty}>Enter event ID</h1>
+      )}
+    </>
   );
 }
 

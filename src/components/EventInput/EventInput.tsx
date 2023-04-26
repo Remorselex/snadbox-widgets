@@ -1,12 +1,12 @@
 import { TextField } from '@mui/material';
 
-import { IsetEventId } from '../../utils/interfaces';
+import { IsetEventId } from '../../utils/types';
 
 function EventInput({ setEventId }: IsetEventId) {
   return (
     <TextField
       onChange={(event) => setEventId(event.target.value)}
-      sx={{ width: '30%' }}
+      sx={{ width: '33%' }}
       label='Enter event ID'
       variant='outlined'
       size='small'
