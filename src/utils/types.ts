@@ -16,6 +16,7 @@ export type EventAction<T> = React.Dispatch<React.SetStateAction<T>>;
 export interface IWidgetContainerProps {
   widgetType: Widgets;
   eventId: EventId;
+  isEditorOpen: boolean;
   widgetsStyle?: WidgetsStyle;
 }
 
@@ -30,4 +31,5 @@ export interface IsetWidgetsStyle {
 export interface ISetWIdgets {
   setWidgetType: EventAction<Widgets>;
   setEventId: EventAction<EventId>;
+  setIsEditorOpen: EventAction<boolean>;
 }

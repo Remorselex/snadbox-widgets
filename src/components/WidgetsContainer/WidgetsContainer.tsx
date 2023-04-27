@@ -1,24 +1,26 @@
 import Slide from '@mui/material/Slide';
 
-import { useRef, useState } from 'react';
+import { useRef } from 'react';
 
 import classes from './WidgetsContainer.module.css';
 
 import { useWidgetsEffect } from '../../hooks/useWidgetsEffect';
 import { useWidgetsStyles } from '../../hooks/useWidgetsStyles';
 import { IWidgetContainerProps } from '../../utils/types';
-import CircleButton from '../CircleButton/CircleButton';
+//import CircleButton from '../CircleButton/CircleButton';
 import CodeModal from '../CodeModal/CodeModal';
 import CssEditor from '../CssEditor/CssEditor';
 
-function WidgetsContainer({ widgetType, eventId }: IWidgetContainerProps) {
+function WidgetsContainer({
+  widgetType,
+  eventId,
+  isEditorOpen,
+}: IWidgetContainerProps) {
   const widgetsRef = useRef(null);
   const [widgetsStyle, setWidgetsStyle] = useWidgetsStyles(widgetsRef);
   useWidgetsEffect(widgetsStyle, widgetType);
-  const [isOpen, setIsOpen] = useState(true);
 
-  const btnRange = isOpen ? '28.5%' : '0';
-  const blockWidth = isOpen ? '70%' : '100%';
+  const blockWidth = isEditorOpen ? '70%' : '100%';
   const isEventIdValid = eventId && eventId.length === 36;
 
   return (
@@ -28,7 +30,7 @@ function WidgetsContainer({ widgetType, eventId }: IWidgetContainerProps) {
           <div
             style={{
               width: blockWidth,
-              transition: '300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms',
+              transition: ' 0.3s cubic-bezier(0.3, 0, 0.3, 1) 300ms',
             }}
           >
             {/*@ts-ignore*/}
@@ -41,7 +43,7 @@ function WidgetsContainer({ widgetType, eventId }: IWidgetContainerProps) {
           <div>
             <Slide
               mountOnEnter
-              in={isOpen}
+              in={isEditorOpen}
               direction='right'
               timeout={300}
               appear={false}
@@ -57,21 +59,11 @@ function WidgetsContainer({ widgetType, eventId }: IWidgetContainerProps) {
                 </div>
                 <div className={classes.containerBtn}>
                   <CodeModal
-                    btnStyle={{ color: '#e0dada', borderColor: '#e0dada' }}
+                    btnStyle={{ color: 'white', borderColor: 'white' }}
                   />
                 </div>
               </div>
             </Slide>
-            <div
-              style={{
-                position: 'fixed',
-                left: btnRange,
-                zIndex: 100,
-                transition: '300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms',
-              }}
-            >
-              <CircleButton setIsOpen={setIsOpen} isOpen={isOpen} />
-            </div>
           </div>
         </div>
       ) : (
