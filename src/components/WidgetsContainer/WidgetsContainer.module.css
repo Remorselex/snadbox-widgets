@@ -7,8 +7,10 @@
 .container {
   position: fixed;
   left: 0;
-  width: 34%;
-  height: 90%;
+  width: 30%;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
   color: #e0dada;
 }
 
@@ -18,14 +20,15 @@
   align-items: center;
   background: #282a36;
   height: 5%;
+  flex: 0.5;
   font-size: 14px;
 }
 
 .containerBtn {
   display: flex;
   justify-content: center;
-  align-items: center;
-  height: 10%;
+  align-items: flex-start;
+  flex: 1.3;
   background: #282a36;
 }
 

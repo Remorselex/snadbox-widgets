@@ -6,7 +6,7 @@ function EventInput({ setEventId }: IsetEventId) {
   return (
     <TextField
       onChange={(event) => setEventId(event.target.value)}
-      sx={{ width: '33%' }}
+      sx={{ width: '28%' }}
       label='Enter event ID'
       variant='outlined'
       size='small'

@@ -24,7 +24,7 @@ function CssEditor({ setWidgetsStyle }: IsetWidgetsStyle) {
         theme='dracula'
         name='css-editor'
         width='100%'
-        height='90%'
+        height='100%'
         onChange={handleEditorChange}
         fontSize={14}
         showPrintMargin={false}
