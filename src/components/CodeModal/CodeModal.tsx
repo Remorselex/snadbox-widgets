@@ -4,7 +4,11 @@ import Modal from '@mui/material/Modal';
 import Typography from '@mui/material/Typography';
 import { useState } from 'react';
 
+import { CSSProperties } from 'react';
+
 import { STYLED_WIDGET_SCRIPT } from '../../utils/constants';
+
+type Props = { btnStyle: CSSProperties };
 
 const style = {
   position: 'absolute',
@@ -17,7 +21,7 @@ const style = {
   boxShadow: 24,
   p: 4,
 };
-function CodeModal({ btnStyle }: any) {
+function CodeModal({ btnStyle }: Props) {
   const [open, setOpen] = useState(false);
   const [checked, setChecked] = useState(false);
   const handleModalAction = () => {
