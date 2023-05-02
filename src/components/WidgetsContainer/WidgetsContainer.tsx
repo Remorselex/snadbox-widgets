@@ -30,7 +30,7 @@ function WidgetsContainer({
           <div
             style={{
               width: blockWidth,
-              transition: ' 0.3s cubic-bezier(0.3, 0, 0.3, 1) 300ms',
+              transition: ' 0.3s cubic-bezier(0.3, 0, 0.3, 1) 0ms',
             }}
           >
             {/*@ts-ignore*/}
