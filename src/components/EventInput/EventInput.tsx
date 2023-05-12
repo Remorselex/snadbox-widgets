@@ -1,8 +1,12 @@
 import { TextField } from '@mui/material';
 
-import { IsetEventId } from '../../utils/types';
+import { EventAction, EventId } from '../../utils/types';
 
-function EventInput({ setEventId }: IsetEventId) {
+export interface IEventInputProps {
+  setEventId: EventAction<EventId>;
+}
+
+const EventInput = ({ setEventId }: IEventInputProps) => {
   return (
     <TextField
       onChange={(event) => setEventId(event.target.value)}
@@ -13,6 +17,6 @@ function EventInput({ setEventId }: IsetEventId) {
       margin='dense'
     />
   );
-}
+};
 
 export default EventInput;

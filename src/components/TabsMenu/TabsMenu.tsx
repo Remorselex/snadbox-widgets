@@ -1,13 +1,23 @@
-import { TabContext, TabList, TabPanel } from '@mui/lab';
+import { TabContext, TabList } from '@mui/lab';
 
 import { Box, Button, Tab } from '@mui/material';
 import React, { useState } from 'react';
 
 import { WIDGET_TYPE_MAP } from '../../utils/constants';
-import { ISetWIdgets } from '../../utils/types';
+import { EventAction, EventId, Widgets } from '../../utils/types';
 import EventInput from '../EventInput/EventInput';
 
-function TabsMenu({ setWidgetType, setEventId, setIsEditorOpen }: ISetWIdgets) {
+interface ITabsMenuProps {
+  setWidgetType: EventAction<Widgets>;
+  setEventId: EventAction<EventId>;
+  setIsEditorOpen: EventAction<boolean>;
+}
+
+const TabsMenu = ({
+  setWidgetType,
+  setEventId,
+  setIsEditorOpen,
+}: ITabsMenuProps) => {
   const [value, setValue] = useState('1');
   const [isToggled, setIsToggled] = useState(true);
   const handleChange = (event: React.SyntheticEvent, newValue: string) =>
@@ -60,12 +70,8 @@ function TabsMenu({ setWidgetType, setEventId, setIsEditorOpen }: ISetWIdgets) {
           <Tab label='Preregistration' value='3' />
         </TabList>
       </Box>
-      <TabPanel value='1'></TabPanel>
-      <TabPanel value='2'></TabPanel>
-      <TabPanel value='3'></TabPanel>
-      <TabPanel value='4'></TabPanel>
     </TabContext>
   );
-}
+};
 
 export default TabsMenu;

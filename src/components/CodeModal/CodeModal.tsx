@@ -6,9 +6,17 @@ import { useState } from 'react';
 
 import { CSSProperties } from 'react';
 
-import { STYLED_WIDGET_SCRIPT } from '../../utils/constants';
+type CodeModalProps = { btnStyle: CSSProperties };
 
-type Props = { btnStyle: CSSProperties };
+export const STYLED_WIDGET_SCRIPT = (widgetStyle: string): string => `
+<script>  
+  let widget = 
+  Array.from(document.getElementsByTagName('dealroomevent-widgets'));
+  const style = document.createElement( 'style' );
+  style.innerHTML = \` ${widgetStyle} \`;
+  let widgetShadow = widget[0].attachShadow({ mode: "open" });
+  widgetShadow.appendChild(style);
+</script>`;
 
 const style = {
   position: 'absolute',
@@ -21,7 +29,7 @@ const style = {
   boxShadow: 24,
   p: 4,
 };
-function CodeModal({ btnStyle }: Props) {
+const CodeModal = ({ btnStyle }: CodeModalProps) => {
   const [open, setOpen] = useState(false);
   const [checked, setChecked] = useState(false);
   const handleModalAction = () => {
@@ -29,11 +37,12 @@ function CodeModal({ btnStyle }: Props) {
     setChecked(!checked);
   };
 
-  function copyToClipboard(): void {
+  const copyToClipboard = (): void => {
     navigator.clipboard.writeText(
       STYLED_WIDGET_SCRIPT(localStorage.getItem('widgetsStyle') || '')
     );
-  }
+  };
+
   return (
     <div>
       <Button
@@ -71,6 +80,6 @@ function CodeModal({ btnStyle }: Props) {
       </Modal>
     </div>
   );
-}
+};
 
 export default CodeModal;

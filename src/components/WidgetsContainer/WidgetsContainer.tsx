@@ -6,16 +6,22 @@ import classes from './WidgetsContainer.module.css';
 
 import { useWidgetsEffect } from '../../hooks/useWidgetsEffect';
 import { useWidgetsStyles } from '../../hooks/useWidgetsStyles';
-import { IWidgetContainerProps } from '../../utils/types';
-//import CircleButton from '../CircleButton/CircleButton';
+import { EventId, Widgets, WidgetsStyle } from '../../utils/types';
 import CodeModal from '../CodeModal/CodeModal';
 import CssEditor from '../CssEditor/CssEditor';
 
-function WidgetsContainer({
+interface IWidgetContainerProps {
+  widgetType: Widgets;
+  eventId: EventId;
+  isEditorOpen: boolean;
+  widgetsStyle?: WidgetsStyle;
+}
+
+const WidgetsContainer = ({
   widgetType,
   eventId,
   isEditorOpen,
-}: IWidgetContainerProps) {
+}: IWidgetContainerProps) => {
   const widgetsRef = useRef(null);
   const [widgetsStyle, setWidgetsStyle] = useWidgetsStyles(widgetsRef);
   useWidgetsEffect(widgetsStyle, widgetType);
@@ -71,6 +77,6 @@ function WidgetsContainer({
       )}
     </>
   );
-}
+};
 
 export default WidgetsContainer;

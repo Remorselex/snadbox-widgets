@@ -6,10 +6,14 @@ import 'ace-builds/src-noconflict/mode-css';
 import 'ace-builds/src-noconflict/theme-dracula';
 import 'ace-builds/src-noconflict/ext-language_tools';
 import 'ace-builds/src-noconflict/worker-css';
+import { EventAction, WidgetsStyle } from '../../utils/types';
 //import 'ace-builds/webpack-resolver';
-import { IsetWidgetsStyle } from '../../utils/types';
 
-function CssEditor({ setWidgetsStyle }: IsetWidgetsStyle) {
+interface ICssEditorProps {
+  setWidgetsStyle: EventAction<WidgetsStyle>;
+}
+
+const CssEditor = ({ setWidgetsStyle }: ICssEditorProps) => {
   const [editorValue, setEditorValue] = useState('');
 
   const handleEditorChange = (value: string) => {
@@ -44,6 +48,6 @@ function CssEditor({ setWidgetsStyle }: IsetWidgetsStyle) {
       />
     </>
   );
-}
+};
 
 export default CssEditor;
