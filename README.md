@@ -20,5 +20,5 @@ In the project directory, you can run:
 ### `npm run lint:es -- --fix`
 ### `npm run lint:css -- --fix`
 
-##Deploy 
+## Deploy 
 https://starlit-lollipop-b6d0c7.netlify.app/
